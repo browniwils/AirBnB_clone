@@ -42,18 +42,25 @@ def validate_obj(arg, model) -> bool | str:
     return "{}.{}".format(model_name, instance_id)
 
 def get_all_obj(models={}, model_name=None) -> list:
+    """
+    Retrieve objects and returns it as string
+    representation in a list
+    """
     data = []
     storage.reload()
     try:
         model_objects = storage.objects
-        obj_str
         if not model_name:
             for model in models:
-                for obj in model_objects:
-                    obj_str = model(**obj)
+                for obj_item in model_objects:
+                    obj = model_objects[obj_item]
+                    obj_str = models[model](**obj)
+                    data.append(obj_str.__str__())
+
         if not not model_name:
-            obj_str = model_name(**obj)
-        data.append(obj_str.__str__())
+            for obj_item in model_objects:
+                obj_str = model_name(**obj)
+                data.append(obj_str.__str__())
     except KeyError as err:
         pass
     finally:

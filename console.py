@@ -78,7 +78,7 @@ class HBNBCommand(Cmd):
         check_class = validate_class(arg[0], self.models)
         if not check_class:
             return
-        
+
         instance_objects = validate_obj(arg, self.models)
         if not instance_objects:
             return
@@ -123,22 +123,24 @@ class HBNBCommand(Cmd):
         Prints string representation of all objects
         """
         arg = arg.split()
-        if len(arg) < 2:
+        if len(arg) < 1:
             data = get_all_obj(self.models)
             print(data)
-            return
-        
-        if len(arg) > 2:
             return
 
         check_class = validate_class(arg[0], self.models)
         if not check_class:
             return
 
-        data = get_all_obj(self.models, self.models[arg[1]])
+        data = get_all_obj({}, self.models[arg[0]])
         print(data)
+        return
 
 
 
 if __name__ == "__main__":
-    HBNBCommand().cmdloop()
+    try:
+        HBNBCommand().cmdloop()
+    except KeyboardInterrupt as err:
+        print()
+        exit()
