@@ -4,7 +4,6 @@ Module holds classess for storage engine for storing
 data in to file and database.
 """
 import json
-from typing import Any
 
 
 class FileStorage:

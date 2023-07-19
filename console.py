@@ -3,7 +3,6 @@
 Module for command-line interface or interpreter
 for Airbnb console
 """
-import json
 from cmd import Cmd
 from models import storage
 from models.base_model import BaseModel
