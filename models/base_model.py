@@ -3,7 +3,7 @@ from datetime import datetime
 from uuid import uuid4
 from models import storage
 """
-Module is serves base classess for objects
+Module serves base classess for objects
 in the airbnb project
 """
 

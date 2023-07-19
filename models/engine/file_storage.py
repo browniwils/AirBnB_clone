@@ -25,7 +25,7 @@ class FileStorage:
         self.__file_path = path
         self.__objects = {}
 
-
+    @property
     def all(self) -> dict:
         """
         all() -> dict:
@@ -36,7 +36,13 @@ class FileStorage:
         """
         return self.__objects
 
-    def new(self, obj) -> None:
+    @all.setter
+    def all(self, obj={}):
+        if type(obj) == dict:
+            self.__objects = obj
+        return self
+
+    def new(self, obj):
         """
         new() -> None:
             creates an object in the __object with key
@@ -47,7 +53,9 @@ class FileStorage:
         self.__objects[obj.__class__
                        .__name__ + "." + obj.id] = obj.to_dict()
 
-    def save(self) -> None:
+        return self
+
+    def save(self):
         """
         save() -> None:
             serialized __objects to JSON format and write
@@ -55,6 +63,8 @@ class FileStorage:
         """
         with open(self.__file_path, "w") as storage_file:
             storage_file.write(json.dumps(self.__objects))
+
+        return self
 
     def reload(self) -> None:
         """
@@ -75,13 +85,3 @@ class FileStorage:
                     self.__objects = json.loads(json_data)
             except FileNotFoundError as err:
                 return
-
-    @property
-    def objects(self) -> dict:
-            return self.__objects
-
-    @objects.setter
-    def objects(self, obj={}) -> None:
-        if type(obj) == dict:
-            self.__objects = obj
-        return self

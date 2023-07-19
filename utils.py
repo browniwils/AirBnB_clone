@@ -3,39 +3,66 @@
 from models import storage
 
 
-def validate_input(arg) -> bool:
+def tokenize_arg(arg: str) -> list:
+    """
+    Returns tokenized string in list
+    """
+    arg = arg.split()
+    tokens = []
+    token = ""
+    
+    for item in arg:
+        if item[0] == "\"":
+            token = item[1:]
+            continue
+        elif item[-1] == "\"":
+            token += " {}".format(item[:-1])
+            tokens.append(token)
+        else:
+            tokens.append(item)
+
+    return tokens
+
+def validate_input(arg: str) -> bool:
     """
     Validate input for valid model name and its existance
     """
-    arg = arg.split()
-
+    arg = tokenize_arg(arg)
     if len(arg) < 1:
         print("** class name missing **")
         return False
     return True
 
-def validate_class(class_name, models={}) -> bool:
+def validate_class(arg: str, models={}) -> bool:
     """
     Return true if class exist
     """
+    arg = tokenize_arg(arg)
+    class_name = arg[0]
     for key in models:
         if class_name == key:
             return True
 
     print("*** class doesn't exist **")
     return False
-    
-def validate_obj(arg, model) -> bool | str:
+
+def validate_id(arg: str) -> bool:
+    """
+    Validates input `id`
+    """
+    arg = tokenize_arg(arg)
+    if len(arg) < 2:
+        print("** instance id missing **")
+        return False
+    return True
+
+def validate_obj(arg: str, model: dict) -> bool | str:
     """
     Validates input `id` and return string
     combination of model name and id in the
     format `Model.Id`
     """
-    arg = arg.split()
-    if len(arg) < 2:
-        print("** instance id missing **")
-        return False
-    
+    arg = tokenize_arg(arg)
     model_key = arg[0]
     instance_id = arg[1]
     model_name = model[model_key]().__class__.__name__
@@ -49,18 +76,21 @@ def get_all_obj(models={}, model_name=None) -> list:
     data = []
     storage.reload()
     try:
-        model_objects = storage.objects
+        model_objects = storage.all
+        model_objects_keys = list(model_objects.keys())
         if not model_name:
             for model in models:
-                for obj_item in model_objects:
+                for obj_item in model_objects_keys:
                     obj = model_objects[obj_item]
-                    obj_str = models[model](**obj)
-                    data.append(obj_str.__str__())
-
+                    if obj["__class__"] == model:
+                        obj_str = models[model](**obj)
+                        data.append(obj_str.__str__())
         if not not model_name:
-            for obj_item in model_objects:
-                obj_str = model_name(**obj)
-                data.append(obj_str.__str__())
+            for obj_item in model_objects_keys:
+                obj = model_objects[obj_item]
+                if obj["__class__"] == model_name().__class__.__name__:
+                    obj_str = model_name(**obj)
+                    data.append(obj_str.__str__())
     except KeyError as err:
         pass
     finally:
