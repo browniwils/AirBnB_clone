@@ -194,8 +194,4 @@ class HBNBCommand(Cmd):
 
 
 if __name__ == "__main__":
-    try:
-        HBNBCommand().cmdloop()
-    except KeyboardInterrupt as err:
-        print()
-        exit()
+    HBNBCommand().cmdloop()
