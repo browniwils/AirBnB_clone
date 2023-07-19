@@ -72,13 +72,13 @@ class FileStorage:
             deserialized objects written to dictionary/storage_file.json
             to python dictionary and set it to __objects.
         """
-    
+
         # checks if `self.__file_path` exist
         if len(self.__file_path) > 0:
             try:
                 with open(self.__file_path) as storage_file:
                     json_data = storage_file.read()
-                    
+
                     # checks if `self.__file_path` content is a json string
                     if len(json_data) < 1 or json_data == "{}":
                         return

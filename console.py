@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-
+Module for command-line interface or interpreter
+for Airbnb console
 """
 import json
 from cmd import Cmd
@@ -18,7 +19,8 @@ from utils import validate_obj, get_all_obj, tokenize_arg
 
 class HBNBCommand(Cmd):
     """
-    
+    class for Airbnb command-line interface or interpreter
+    `The Airbnb console`
     """
     prompt = "(hbnb) "
     models = {
@@ -63,7 +65,7 @@ class HBNBCommand(Cmd):
     def do_create(self, arg: str) -> None:
         """
         Creates object instance and save to file
-        in JSON format        
+        in JSON format
         """
         check_input = validate_input(arg)
         if not check_input:
@@ -169,16 +171,16 @@ class HBNBCommand(Cmd):
 
         arg_dup = arg
         arg = tokenize_arg(arg)
-        
+
         if len(arg) < 3:
             print("** attribute name missing **")
             return
-        
+
         # check if input arguments are in pairs
         if len(arg) < 4:
             print("** value missing **")
             return
-        
+
         storage.reload()
         model_objects = storage.all
         obj_key = validate_obj(arg_dup, self.models)
@@ -190,7 +192,6 @@ class HBNBCommand(Cmd):
             new_obj.save()
         except KeyError as err:
             print("** no instance found **")
-        
 
 if __name__ == "__main__":
     try:

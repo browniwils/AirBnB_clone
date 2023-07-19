@@ -1,4 +1,5 @@
 """
+Module contains utility or helper functions
 """
 from models import storage
 
@@ -10,7 +11,7 @@ def tokenize_arg(arg: str) -> list:
     arg = arg.split()
     tokens = []
     token = ""
-    
+
     for item in arg:
         if item[0] == "\"":
             token = item[1:]
@@ -23,6 +24,7 @@ def tokenize_arg(arg: str) -> list:
 
     return tokens
 
+
 def validate_input(arg: str) -> bool:
     """
     Validate input for valid model name and its existance
@@ -32,6 +34,7 @@ def validate_input(arg: str) -> bool:
         print("** class name missing **")
         return False
     return True
+
 
 def validate_class(arg: str, models={}) -> bool:
     """
@@ -46,6 +49,7 @@ def validate_class(arg: str, models={}) -> bool:
     print("*** class doesn't exist **")
     return False
 
+
 def validate_id(arg: str) -> bool:
     """
     Validates input `id`
@@ -55,6 +59,7 @@ def validate_id(arg: str) -> bool:
         print("** instance id missing **")
         return False
     return True
+
 
 def validate_obj(arg: str, model: dict) -> bool | str:
     """
@@ -67,6 +72,7 @@ def validate_obj(arg: str, model: dict) -> bool | str:
     instance_id = arg[1]
     model_name = model[model_key]().__class__.__name__
     return "{}.{}".format(model_name, instance_id)
+
 
 def get_all_obj(models={}, model_name=None) -> list:
     """
