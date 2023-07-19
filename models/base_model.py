@@ -39,8 +39,7 @@ class BaseModel:
         Return and prints string representation
         of the class model
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, 
-                                         self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self) -> None:
         """
@@ -50,12 +49,12 @@ class BaseModel:
         self.updated_at = datetime.now()
         self.updated_at = self.updated_at.isoformat()
         storage.save()
-    
+
     def to_dict(self) -> dict:
         """
         to_dict -> returns a python dictionary
-        containing all keys and values pairs of 
-        __dict__ the instance with __class__ key 
+        containing all keys and values pairs of
+        __dict__ the instance with __class__ key
         and classname value
         """
         self.created_at = self.created_at.isoformat()
