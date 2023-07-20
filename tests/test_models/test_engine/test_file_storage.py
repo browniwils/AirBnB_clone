@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Test module for testing Filestorage class """
-
 from os import path
 from models import storage
 from models.user import User
