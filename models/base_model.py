@@ -60,8 +60,6 @@ class BaseModel:
         __dict__ the instance with __class__ key
         and classname value
         """
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
 
         dictionary = self.__dict__
         dictionary["__class__"] = self.__class__.__name__

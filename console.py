@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
 Module for command-line interface or interpreter
-for Airbnb console
+for Airbnb console. It used to interact with 
+Airbnb project for debugging and testing
 """
 from cmd import Cmd
 from models import storage

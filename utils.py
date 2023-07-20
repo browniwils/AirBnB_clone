@@ -61,7 +61,7 @@ def validate_id(arg: str) -> bool:
     return True
 
 
-def validate_obj(arg: str, model: dict) -> bool | str:
+def validate_obj(arg: str, model: dict) -> str:
     """
     Validates input `id` and return string
     combination of model name and id in the
