@@ -1,7 +1,7 @@
 """
 Module contains utility or helper functions
 """
-from models import storage
+from datetime import datetime
 
 
 def tokenize_arg(arg: str) -> list:
@@ -79,10 +79,11 @@ def get_all_obj(models={}, model_name=None) -> list:
     Retrieve objects and returns it as string
     representation in a list
     """
+    from models import storage
     data = []
     storage.reload()
     try:
-        model_objects = storage.all
+        model_objects = storage.all()
         model_objects_keys = list(model_objects.keys())
         if not model_name:
             for model in models:
@@ -101,3 +102,17 @@ def get_all_obj(models={}, model_name=None) -> list:
         pass
     finally:
         return data
+
+
+def prep_save_to_file(objects, direction="start") -> None:
+    """
+    Prepares storage objects for saving
+    """
+    for obj_key, obj_val in objects.items():
+        for key, val in obj_val.items():
+            if direction == "start":
+                if type(val) == datetime:
+                    objects[obj_key][key] = val.isoformat()
+            if direction == "end":
+                if key == "created_at" or key == "updated_at":
+                    objects[obj_key][key] = datetime.fromisoformat(val)

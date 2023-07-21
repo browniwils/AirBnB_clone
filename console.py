@@ -101,7 +101,7 @@ class HBNBCommand(Cmd):
         instance_objects = validate_obj(arg, self.models)
         storage.reload()
         try:
-            model_object = storage.all[instance_objects]
+            model_object = storage.all()[instance_objects]
             model_key = instance_objects.split(".")[0]
             model_object = self.models[model_key](**model_object)
             print(model_object.__str__())
@@ -128,9 +128,8 @@ class HBNBCommand(Cmd):
         instance_objects = validate_obj(arg, self.models)
         storage.reload()
         try:
-            model_objects = storage.all
+            model_objects = storage.all()
             del model_objects[instance_objects]
-            storage.all = model_objects
             storage.save()
         except KeyError as err:
             print("** no instance found **")
@@ -182,7 +181,7 @@ class HBNBCommand(Cmd):
             return
 
         storage.reload()
-        model_objects = storage.all
+        model_objects = storage.all()
         obj_key = validate_obj(arg_dup, self.models)
         try:
             obj_data = model_objects[obj_key]

@@ -5,6 +5,7 @@ data in to file and database.
 """
 import json
 from datetime import datetime
+from utils import prep_save_to_file
 
 
 class FileStorage:
@@ -25,7 +26,6 @@ class FileStorage:
         self.__file_path = path
         self.__objects = {}
 
-    @property
     def all(self) -> dict:
         """
         all() -> dict:
@@ -36,12 +36,6 @@ class FileStorage:
         """
         return self.__objects
 
-    @all.setter
-    def all(self, obj={}):
-        if type(obj) == dict:
-            self.__objects = obj
-        return self
-
     def new(self, obj):
         """
         new() -> None:
@@ -50,8 +44,8 @@ class FileStorage:
             <obj class name>.id
             e.g: BaseModel.12121212.
         """
-        obj.created_at = obj.created_at.isoformat()
-        obj.updated_at = obj.updated_at.isoformat()
+        # obj.created_at = obj.created_at.isoformat()
+        # obj.updated_at = obj.updated_at.isoformat()
         self.__objects[obj.__class__
                        .__name__ + "." + obj.id] = obj.to_dict()
 
@@ -63,9 +57,12 @@ class FileStorage:
             serialized __objects to JSON format and write
             to file a directory/storage_file.json.
         """
+        prep_save_to_file(self.__objects)          
+
         with open(self.__file_path, "w") as storage_file:
             storage_file.write(json.dumps(self.__objects))
-
+        
+        prep_save_to_file(self.__objects, "end")
         return self
 
     def reload(self) -> None:

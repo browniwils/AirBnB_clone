@@ -27,7 +27,10 @@ class BaseModel:
             for key, val in kwargs.items():
                 if key != "__class__":
                     if key == "created_at" or key == "updated_at":
-                        setattr(self, key, datetime.fromisoformat(val))
+                        try:
+                            setattr(self, key, datetime.fromisoformat(val))
+                        except ValueError as err:
+                            pass
                     else:
                         setattr(self, key, val)
 
@@ -50,7 +53,6 @@ class BaseModel:
         with current date stamp
         """
         self.updated_at = datetime.now()
-        self.updated_at = self.updated_at.isoformat()
         storage.save()
 
     def to_dict(self) -> dict:

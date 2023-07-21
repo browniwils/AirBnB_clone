@@ -33,7 +33,7 @@ class test_storage(unittest.TestCase):
 
     def test_no_objs(self):
         """ Test for storage objects holders """
-        self.assertEqual(storage.all, {})
+        self.assertEqual(storage.all(), {})
 
     def test_all(self):
         """ Test for storage `all` attribute """
@@ -60,13 +60,13 @@ class test_storage(unittest.TestCase):
         state_model = State()
         state_model_key = "{}.{}".format('State', state_model.id)
 
-        self.assertEqual(base_model, storage.all[base_model_key])
-        self.assertEqual(user_model, storage.all[user_model_key])
-        self.assertEqual(city_model, storage.all[city_model_key])
-        self.assertEqual(amenity_model, storage.all[amenity_model_key])
-        self.assertEqual(place_model, storage.all[place_model_key])
-        self.assertEqual(review_model, storage.all[review_model_key])
-        self.assertEqual(state_model, storage.all[state_model_key])
+        self.assertEqual(base_model, storage.all()[base_model_key])
+        self.assertEqual(user_model, storage.all()[user_model_key])
+        self.assertEqual(city_model, storage.all()[city_model_key])
+        self.assertEqual(amenity_model, storage.all()[amenity_model_key])
+        self.assertEqual(place_model, storage.all()[place_model_key])
+        self.assertEqual(review_model, storage.all()[review_model_key])
+        self.assertEqual(state_model, storage.all()[state_model_key])
 
     def test_create_new_object_storage(self):
         """ Test for creating new object in storage class """
@@ -90,7 +90,7 @@ class test_storage(unittest.TestCase):
         state_model = State(id='06')
         state_model_key = "{}.{}".format('State', state_model.id)
 
-        self.assertEqual(storage.all, {})
+        self.assertEqual(storage.all(), {})
         base_model.id = 123
         storage.new(base_model)
         storage.new(user_model)
@@ -99,13 +99,13 @@ class test_storage(unittest.TestCase):
         storage.new(place_model)
         storage.new(review_model)
         storage.new(state_model)
-        self.assertEqual(base_model, storage.all[base_model_key])
-        self.assertEqual(user_model, storage.all[user_model_key])
-        self.assertEqual(city_model, storage.all[city_model_key])
-        self.assertEqual(amenity_model, storage.all[amenity_model_key])
-        self.assertEqual(place_model, storage.all[place_model_key])
-        self.assertEqual(review_model, storage.all[review_model_key])
-        self.assertEqual(state_model, storage.all[state_model_key])
+        self.assertEqual(base_model, storage.all()[base_model_key])
+        self.assertEqual(user_model, storage.all()[user_model_key])
+        self.assertEqual(city_model, storage.all()[city_model_key])
+        self.assertEqual(amenity_model, storage.all()[amenity_model_key])
+        self.assertEqual(place_model, storage.all()[place_model_key])
+        self.assertEqual(review_model, storage.all()[review_model_key])
+        self.assertEqual(state_model, storage.all()[state_model_key])
 
     def test_reload(self):
         """ Test for reloading objects in storage class """
@@ -129,23 +129,23 @@ class test_storage(unittest.TestCase):
         FileStorage._FileStorage__objects = {}
         storage.reload()
 
-        self.assertTrue(base_model_key in storage.all.keys())
-        self.assertEqual(base_model.id, storage.all[base_model_key].id)
+        self.assertTrue(base_model_key in storage.all().keys())
+        self.assertEqual(base_model.id, storage.all()[base_model_key].id)
         
-        self.assertTrue(user_model_key in storage.all.keys())
-        self.assertEqual(user_model.id, storage.all[user_model_key].id)
+        self.assertTrue(user_model_key in storage.all().keys())
+        self.assertEqual(user_model.id, storage.all()[user_model_key].id)
 
-        self.assertTrue(city_model_key in storage.all.keys())
-        self.assertEqual(city_model.id, storage.all[city_model_key].id)
+        self.assertTrue(city_model_key in storage.all().keys())
+        self.assertEqual(city_model.id, storage.all()[city_model_key].id)
 
-        self.assertTrue(amenity_model_key in storage.all.keys())
-        self.assertEqual(amenity_model.id, storage.all[amenity_model_key].id)
+        self.assertTrue(amenity_model_key in storage.all().keys())
+        self.assertEqual(amenity_model.id, storage.all()[amenity_model_key].id)
 
-        self.assertTrue(place_model_key in storage.all.keys())
-        self.assertEqual(place_model.id, storage.all[place_model_key].id)
+        self.assertTrue(place_model_key in storage.all().keys())
+        self.assertEqual(place_model.id, storage.all()[place_model_key].id)
 
-        self.assertTrue(review_model_key in storage.all.keys())
-        self.assertEqual(review_model.id, storage.all[review_model_key].id)
+        self.assertTrue(review_model_key in storage.all().keys())
+        self.assertEqual(review_model.id, storage.all()[review_model_key].id)
 
-        self.assertTrue(state_model_key in storage.all.keys())
-        self.assertEqual(state_model.id, storage.all[state_model_key].id)
+        self.assertTrue(state_model_key in storage.all().keys())
+        self.assertEqual(state_model.id, storage.all()[state_model_key].id)
