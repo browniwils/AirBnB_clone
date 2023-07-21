@@ -4,7 +4,7 @@ Module for command-line interface or interpreter
 for Airbnb console. It used to interact with 
 Airbnb project for debugging and testing
 """
-from cmd import Cmd
+import cmd
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -17,7 +17,7 @@ from utils import validate_input, validate_class, validate_id
 from utils import validate_obj, get_all_obj, tokenize_arg
 
 
-class HBNBCommand(Cmd):
+class HBNBCommand(cmd.Cmd):
     """
     class for Airbnb command-line interface or interpreter
     `The Airbnb console`

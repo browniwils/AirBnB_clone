@@ -26,7 +26,7 @@ class FileStorage:
         self.__file_path = path
         self.__objects = {}
 
-    def all(self) -> dict:
+    def all(self):
         """
         all() -> dict:
             Returns dictionary of all objects created
@@ -44,8 +44,6 @@ class FileStorage:
             <obj class name>.id
             e.g: BaseModel.12121212.
         """
-        # obj.created_at = obj.created_at.isoformat()
-        # obj.updated_at = obj.updated_at.isoformat()
         self.__objects[obj.__class__
                        .__name__ + "." + obj.id] = obj.to_dict()
 

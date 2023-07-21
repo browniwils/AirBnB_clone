@@ -15,10 +15,8 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs) -> None:
         """
-        Initializes objects when instance is
-        created
+        Instantiate object
         """
-
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
@@ -62,7 +60,6 @@ class BaseModel:
         __dict__ the instance with __class__ key
         and classname value
         """
-
         dictionary = self.__dict__
         dictionary["__class__"] = self.__class__.__name__
         return dictionary
