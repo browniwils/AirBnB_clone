@@ -1,14 +1,17 @@
 """
-Module for State instances
+Module for State model
 """
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
     """
-    Class for creating states which inherits
-    `BaseModel` attributes
+    Class for creating state object which inherits
+    `BaseModel` properties
     """
     def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+        """
+        Instantiate State object
+        """
         self.name = ""
+        super().__init__(*args, **kwargs)

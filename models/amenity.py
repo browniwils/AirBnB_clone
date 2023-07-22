@@ -1,14 +1,17 @@
 """
-Module for Amenity instances
+Module for Amenity model
 """
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
     """
-    Class for creating amenities which inherits
-    `BaseModel` attributes
+    Class for creating amenities objects which inherits
+    `BaseModel` properties
     """
     def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+        """
+        Instantiate Amenity object
+        """
         self.name = ""
+        super().__init__(*args, **kwargs)

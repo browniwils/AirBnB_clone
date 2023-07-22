@@ -1,21 +1,20 @@
 #!/usr/bin/python3
+"""
+Module is paprent class for objects in the airbnb project
+"""
 from datetime import datetime
 from uuid import uuid4
 from models import storage
-"""
-Module serves base classess for objects
-in the airbnb project
-"""
 
 
 class BaseModel:
     """
-    BaseModel is the base class that other
-    class will be inherited from
+    BaseModel is the parent class that other
+    classess will inherit its properties
     """
     def __init__(self, *args, **kwargs) -> None:
         """
-        Instantiate object
+        Instantiate BaseModel object
         """
         self.id = str(uuid4())
         self.created_at = datetime.now()
@@ -37,28 +36,26 @@ class BaseModel:
 
     def __str__(self) -> str:
         """
-        Return and prints string representation
-        of the class model
+        Return or prints string representation
+        of this object
         """
         name = self.__class__.__name__
         id = self.id
-        diction = self.__dict__
-        return "[{}] ({}) {}".format(name, id, diction)
+        dictionary = self.__dict__
+        return "[{}] ({}) {}".format(name, id, dictionary)
 
     def save(self) -> None:
         """
-        Method updates object's updated field
-        with current date stamp
+        Updates this object and save to storage
         """
         self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self) -> dict:
         """
-        to_dict -> returns a python dictionary
-        containing all keys and values pairs of
-        __dict__ the instance with __class__ key
-        and classname value
+        Returns object in dictionary in addition with
+        object's class name as `__class__` as a key
+        and `class name` as value
         """
         dictionary = self.__dict__
         dictionary["__class__"] = self.__class__.__name__

@@ -6,19 +6,24 @@ from datetime import datetime
 
 def tokenize_arg(arg: str) -> list:
     """
-    Returns tokenized string in list
+    Returns tokenized string to list
     """
     arg = arg.split()
     tokens = []
     token = ""
 
     for item in arg:
-        if item[0] == "\"":
+        if item[0] == "\"" and item[-1] == "\"":
+            tokens.append(item[1:-1])
+        if item[0] == "'" and item[-1] == "'":
+            tokens.append(item[1:-1])
+        elif item[0] == "\"" or item[0] == "'":
             token = item[1:]
             continue
-        elif item[-1] == "\"":
+        elif item[-1] == "\"" or item[-1] == "'":
             token += " {}".format(item[:-1])
             tokens.append(token)
+            token = ""
         else:
             tokens.append(item)
 

@@ -1,59 +1,46 @@
 #!/usr/bin/python3
 """
-Module holds classess for storage engine for storing
+Module is a class for storage engine for storing
 data in to file and database.
 """
 import json
-from datetime import datetime
 from utils import prep_save_to_file
 
 
 class FileStorage:
     """
-    FileStorage():
-        This class is the core storage engine for
-        storing serialize JSON data to file and
-        deserializes JSON data from file.
+    Storage object class is the core storage engine for
+    storing serialize JSON data to file and
+    deserializes JSON data from file.
     """
 
     def __init__(self, path="") -> None:
         """
-        __init__() -> None:
-            path -> str:
-                initializes instance of this class
-                with parsed arg as properties.
+        Instanciate storage object.
         """
         self.__file_path = path
         self.__objects = {}
 
     def all(self):
         """
-        all() -> dict:
-            Returns dictionary of all objects created
-            with class_name and object id in the format
-            <class name>.id>
-            e.g: BaseModel.12121212.
+        Returns all storage objects.
         """
         return self.__objects
 
     def new(self, obj):
         """
-        new() -> None:
-            creates an object in the __object with key
-            of object's class name and id in the formart
-            <obj class name>.id
-            e.g: BaseModel.12121212.
+        Creates new storage object.
+        `obj` is model object.
         """
-        self.__objects[obj.__class__
-                       .__name__ + "." + obj.id] = obj.to_dict()
-
+        id = obj.id
+        name = obj.__class__.__name__
+        self.__objects["{}.{}".format(name, id)] = obj.to_dict()
         return self
 
     def save(self):
         """
-        save() -> None:
-            serialized __objects to JSON format and write
-            to file a directory/storage_file.json.
+        Save serialized storage objects to JSON data,
+        and write it to file in a .json extension.
         """
         prep_save_to_file(self.__objects)          
 
@@ -65,9 +52,8 @@ class FileStorage:
 
     def reload(self) -> None:
         """
-        reload() -> None:
-            deserialized objects written to dictionary/storage_file.json
-            to python dictionary and set it to __objects.
+        Loads JSON data from file with .json extension,
+        and deserialized it to storage objects.
         """
 
         # checks if `self.__file_path` exist
@@ -76,7 +62,7 @@ class FileStorage:
                 with open(self.__file_path) as storage_file:
                     json_data = storage_file.read()
 
-                    # checks if `self.__file_path` content is a json string
+                    # checks if self.__file_path content is empty
                     if len(json_data) < 1 or json_data == "{}":
                         return
                     self.__objects = json.loads(json_data)
