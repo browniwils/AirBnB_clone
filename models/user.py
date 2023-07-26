@@ -9,6 +9,10 @@ class User(BaseModel):
     Class for creating user object which inherits
     `BaseModel` properties
     """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
     def __init__(self, *args, **kwargs):
         """
         Instantiate User object

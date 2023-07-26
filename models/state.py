@@ -9,6 +9,7 @@ class State(BaseModel):
     Class for creating state object which inherits
     `BaseModel` properties
     """
+    name = ""
     def __init__(self, *args, **kwargs):
         """
         Instantiate State object
