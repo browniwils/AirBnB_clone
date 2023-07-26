@@ -13,7 +13,8 @@ class FileStorage:
     storing serialize JSON data to file and
     deserializes JSON data from file.
     """
-
+    __file_path = "file.json"
+    __objects = {}
     def __init__(self, path=""):
         """
         Instanciate storage object.
