@@ -3,7 +3,7 @@
 Command-line interface or interpreter `Airbnb console`.
 Used to interact with Airbnb project for debugging and testing
 """
-import cmd, json
+import cmd
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg: str):
         """
-        Deletes an object base on model name and id 
+        Deletes an object base on model name and id
         from `arg` and update storage
         """
         check_input = validate_input(arg)

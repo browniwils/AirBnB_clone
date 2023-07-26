@@ -15,6 +15,7 @@ class FileStorage:
     """
     __file_path = "file.json"
     __objects = {}
+
     def __init__(self, path=""):
         """
         Instanciate storage object.
@@ -43,11 +44,11 @@ class FileStorage:
         Save serialized storage objects to JSON data,
         and write it to file in a .json extension.
         """
-        prep_save_to_file(self.__objects)          
+        prep_save_to_file(self.__objects)
 
         with open(self.__file_path, "w") as storage_file:
             storage_file.write(json.dumps(self.__objects))
-        
+
         prep_save_to_file(self.__objects, "end")
         return self
 

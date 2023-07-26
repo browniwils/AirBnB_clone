@@ -10,6 +10,7 @@ class State(BaseModel):
     `BaseModel` properties
     """
     name = ""
+
     def __init__(self, *args, **kwargs):
         """
         Instantiate State object

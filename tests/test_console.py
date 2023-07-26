@@ -2,7 +2,8 @@
 """
 Program for Unit test for the file storage class
 """
-import os, json, unittest
+import os
+import unittest
 from io import StringIO
 from unittest.mock import patch
 from console import HBNBCommand
@@ -16,6 +17,8 @@ class TestConsoleClass(unittest.TestCase):
     maxDiff = None
     file_path = "test.json"
     storage = FileStorage(file_path)
+    clas_n_m = "** class name missing **"
+    clas_d_e = "** class doesn't exist **\n"
 
     def setUp(self):
         """ condition to test file saving """
@@ -54,11 +57,11 @@ class TestConsoleClass(unittest.TestCase):
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("create")
-            self.assertEqual(content.getvalue(), "** class name missing **\n")
+            self.assertEqual(content.getvalue(), self.clas_n_m)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("create Holberton")
-            self.assertEqual(content.getvalue(), "** class doesn't exist **\n")
+            self.assertEqual(content.getvalue(), self.cls_d_e)
 
     def test_show(self):
         """ test for object show """
@@ -72,11 +75,11 @@ class TestConsoleClass(unittest.TestCase):
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('show helloo ')
-            self.assertTrue(content.getvalue() == "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() == self.cls_d_e)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('show')
-            self.assertTrue(content.getvalue() == "** class name missing **\n")
+            self.assertTrue(content.getvalue() == self.clas_n_m)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('show BaseModel')
@@ -86,11 +89,11 @@ class TestConsoleClass(unittest.TestCase):
         """ test for destroy object """
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('destroy')
-            self.assertTrue(content.getvalue() == "** class name missing **\n")
+            self.assertTrue(content.getvalue() == self.clas_n_m)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('destroy fakeclass')
-            self.assertTrue(content.getvalue() == "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() == self.cls_d_e)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('destroy BaseModel')
@@ -114,7 +117,7 @@ class TestConsoleClass(unittest.TestCase):
             HBNBCommand().onecmd('create BaseModel')
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('all FakeClass')
-            self.assertTrue(content.getvalue() == "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() == self.cls_d_e)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('all')
@@ -128,11 +131,11 @@ class TestConsoleClass(unittest.TestCase):
         """ test for update """
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('update')
-            self.assertTrue(content.getvalue() == "** class name missing **\n")
+            self.assertTrue(content.getvalue() == self.clas_n_m)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('update FakeClass')
-            self.assertTrue(content.getvalue() == "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() == self.cls_d_e)
 
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd('update BaseModel')
@@ -154,7 +157,8 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(content.getvalue() == "** value missing **\n")
 
         with patch('sys.stdout', new=StringIO()) as content:
-            HBNBCommand().onecmd("{} {} {}".format("update BaseModel", id, "name betty"))
+            HBNBCommand().onecmd("{} {} {}".format("update BaseModel",
+                                                   id, "name betty"))
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("{} {}".format("show BaseModel", id))
             self.assertTrue("betty" in content.getvalue())
@@ -164,13 +168,13 @@ class TestConsoleClass(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("create User")
             id = content.getvalue()
-            self.assertTrue(id != "** class doesn't exist **\n")
+            self.assertTrue(id != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("show User " + id)
             self.assertTrue(content.getvalue() != "** no instance found **\n")
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("all User")
-            self.assertTrue(content.getvalue() != "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("update User " + id + " name betty")
             HBNBCommand().onecmd("show User " + id)
@@ -185,13 +189,13 @@ class TestConsoleClass(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("create Place")
             id = content.getvalue()
-            self.assertTrue(id != "** class doesn't exist **\n")
+            self.assertTrue(id != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("show Place " + id)
             self.assertTrue(content.getvalue() != "** no instance found **\n")
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("all Place")
-            self.assertTrue(content.getvalue() != "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("update Place " + id + " name betty")
             HBNBCommand().onecmd("show Place " + id)
@@ -206,13 +210,13 @@ class TestConsoleClass(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("create State")
             id = content.getvalue()
-            self.assertTrue(id != "** class doesn't exist **\n")
+            self.assertTrue(id != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("show State " + id)
             self.assertTrue(content.getvalue() != "** no instance found **\n")
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("all State")
-            self.assertTrue(content.getvalue() != "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("update State " + id + " name betty")
             HBNBCommand().onecmd("show State " + id)
@@ -227,13 +231,13 @@ class TestConsoleClass(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("create City")
             id = content.getvalue()
-            self.assertTrue(id != "** class doesn't exist **\n")
+            self.assertTrue(id != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("show City " + id)
             self.assertTrue(content.getvalue() != "** no instance found **\n")
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("all City")
-            self.assertTrue(content.getvalue() != "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("update City " + id + " name betty")
             HBNBCommand().onecmd("show City " + id)
@@ -248,13 +252,13 @@ class TestConsoleClass(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("create Amenity")
             id = content.getvalue()
-            self.assertTrue(id != "** class doesn't exist **\n")
+            self.assertTrue(id != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("show Amenity " + id)
             self.assertTrue(content.getvalue() != "** no instance found **\n")
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("all Amenity")
-            self.assertTrue(content.getvalue() != "** class doesn't exist **\n")
+            self.assertTrue(content.getvalue() != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as content:
             HBNBCommand().onecmd("update Amenity " + id + " name betty")
             HBNBCommand().onecmd("show Amenity " + id)
@@ -269,13 +273,13 @@ class TestConsoleClass(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create Review")
             id = val.getvalue()
-            self.assertTrue(id != "** class doesn't exist **\n")
+            self.assertTrue(id != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("show Review " + id)
             self.assertTrue(val.getvalue() != "** no instance found **\n")
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("all Review")
-            self.assertTrue(val.getvalue() != "** class doesn't exist **\n")
+            self.assertTrue(val.getvalue() != self.cls_d_e)
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("update Review " + id + " name betty")
             HBNBCommand().onecmd("show Review " + id)
