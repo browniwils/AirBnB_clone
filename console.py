@@ -190,14 +190,14 @@ class HBNBCommand(cmd.Cmd):
         except KeyError as err:
             print("** no instance found **")
 
-    def do_count(self, arg)
+    def do_count(self, arg):
         """
         Counts number of objects base no model name
         """
         data = get_all_obj({}, self.models[arg[0]])
         print(len(data))
 
-    def default(self, line: str)
+    def default(self, line: str):
         if "(" not in line or ")" not in line:
             print("** missing parentesis **")
             return

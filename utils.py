@@ -55,7 +55,7 @@ def validate_class(arg: str, models={}):
     return False
 
 
-def validate_id(arg: str) -> bool:
+def validate_id(arg: str):
     """
     Validates input `id`
     """
