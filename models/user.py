@@ -9,7 +9,7 @@ class User(BaseModel):
     Class for creating user object which inherits
     `BaseModel` properties
     """
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         """
         Instantiate User object
         """

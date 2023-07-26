@@ -14,7 +14,7 @@ class FileStorage:
     deserializes JSON data from file.
     """
 
-    def __init__(self, path="") -> None:
+    def __init__(self, path=""):
         """
         Instanciate storage object.
         """
@@ -50,7 +50,7 @@ class FileStorage:
         prep_save_to_file(self.__objects, "end")
         return self
 
-    def reload(self) -> None:
+    def reload(self):
         """
         Loads JSON data from file with .json extension,
         and deserialized it to storage objects.

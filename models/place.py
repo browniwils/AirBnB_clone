@@ -9,7 +9,7 @@ class Place(BaseModel):
     Class for creating place object which inherits
     `BaseModel` properties
     """
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         """
         Instantiate Place object
         """

@@ -1,0 +1,21 @@
+section.places {
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.places h1 {
+    font-size: 30px;
+}
+
+.places ul {
+    text-align: center;
+}
+
+.places li {
+    width: 390px;
+    display: inline-block;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ff5a5f;
+    border-radius: 4px;
+}

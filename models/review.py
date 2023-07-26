@@ -9,7 +9,7 @@ class Review(BaseModel):
     Class for creating review object which inherits
     `BaseModel` properties
     """
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         """
         Instantiate Review object
         """

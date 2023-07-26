@@ -12,7 +12,7 @@ class BaseModel:
     BaseModel is the parent class that other
     classess will inherit its properties
     """
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         """
         Instantiate BaseModel object
         """
@@ -44,7 +44,7 @@ class BaseModel:
         dictionary = self.__dict__
         return "[{}] ({}) {}".format(name, id, dictionary)
 
-    def save(self) -> None:
+    def save(self):
         """
         Updates this object and save to storage
         """

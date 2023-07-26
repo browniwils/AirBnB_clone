@@ -4,7 +4,7 @@ Module contains utility or helper functions
 from datetime import datetime
 
 
-def tokenize_arg(arg: str) -> list:
+def tokenize_arg(arg: str):
     """
     Returns tokenized string to list
     """
@@ -30,7 +30,7 @@ def tokenize_arg(arg: str) -> list:
     return tokens
 
 
-def validate_input(arg: str) -> bool:
+def validate_input(arg: str):
     """
     Validate input for valid model name and its existance
     """
@@ -41,7 +41,7 @@ def validate_input(arg: str) -> bool:
     return True
 
 
-def validate_class(arg: str, models={}) -> bool:
+def validate_class(arg: str, models={}):
     """
     Return true if class exist
     """
@@ -66,7 +66,7 @@ def validate_id(arg: str) -> bool:
     return True
 
 
-def validate_obj(arg: str, model: dict) -> str:
+def validate_obj(arg: str, model: dict):
     """
     Validates input `id` and return string
     combination of model name and id in the
@@ -79,7 +79,7 @@ def validate_obj(arg: str, model: dict) -> str:
     return "{}.{}".format(model_name, instance_id)
 
 
-def get_all_obj(models={}, model_name=None) -> list:
+def get_all_obj(models={}, model_name=None):
     """
     Retrieve objects and returns it as string
     representation in a list
@@ -109,7 +109,7 @@ def get_all_obj(models={}, model_name=None) -> list:
         return data
 
 
-def prep_save_to_file(objects, direction="start") -> None:
+def prep_save_to_file(objects, direction="start"):
     """
     Prepares storage objects for saving
     """

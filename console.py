@@ -32,34 +32,34 @@ class HBNBCommand(cmd.Cmd):
                 "Review": Review,
             }
 
-    def do_quit(self, arg: str) -> None:
+    def do_quit(self, arg: str):
         """
         Exits interpreter session
         """
         exit()
 
-    def do_EOF(self, arg: str) -> None:
+    def do_EOF(self, arg: str):
         """
         Prints nothing
         """
         print("")
         return True
 
-    def emptyline(self) -> None:
+    def emptyline(self):
         """
         Immediately returns to prevent
         last command execution
         """
         return
 
-    def do_help(self, arg: str) -> bool | None:
+    def do_help(self, arg: str):
         """
         Prints or show infomation on active
         commands
         """
         return super().do_help(arg)
 
-    def do_create(self, arg: str) -> None:
+    def do_create(self, arg: str):
         """
         Creates object instance base on model's name `arg`
         and save to file in JSON format
@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
         new_object.save()
         print(new_object.id)
 
-    def do_show(self, arg: str) -> None:
+    def do_show(self, arg: str):
         """
         Shows an object string representation
         base on model and object's id from `arg`
@@ -105,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
         except KeyError as err:
             print("** no instance found **")
 
-    def do_destroy(self, arg: str) -> None:
+    def do_destroy(self, arg: str):
         """
         Deletes an object base on model name and id 
         from `arg` and update storage
@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
         except KeyError as err:
             print("** no instance found **")
 
-    def do_all(self, arg: str) -> None:
+    def do_all(self, arg: str):
         """
         Shows all objects string representation
         base on or not model name from `arg`
@@ -150,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
         print(data)
         return
 
-    def do_update(self, arg: str) -> None:
+    def do_update(self, arg: str):
         """
         Update object based on id and model name from `arg`
         """
@@ -190,14 +190,14 @@ class HBNBCommand(cmd.Cmd):
         except KeyError as err:
             print("** no instance found **")
 
-    def do_count(self, arg) -> None:
+    def do_count(self, arg)
         """
         Counts number of objects base no model name
         """
         data = get_all_obj({}, self.models[arg[0]])
         print(len(data))
 
-    def default(self, line: str) -> None:
+    def default(self, line: str)
         if "(" not in line or ")" not in line:
             print("** missing parentesis **")
             return

@@ -9,7 +9,7 @@ class City(BaseModel):
     Class for creating city object which inherits
     `BaseModel` properties
     """
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         """
         Instantiate City object
         """

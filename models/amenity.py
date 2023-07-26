@@ -9,7 +9,7 @@ class Amenity(BaseModel):
     Class for creating amenities objects which inherits
     `BaseModel` properties
     """
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         """
         Instantiate Amenity object
         """
